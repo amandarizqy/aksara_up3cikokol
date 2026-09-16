@@ -1,0 +1,576 @@
+:root {
+  --navy: #101a3d;
+  --navy-light: #1a2650;
+  --orange: #f5730b;
+  --orange-soft: #fff1e6;
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --border: #e6e9f2;
+  --text: #1c2340;
+  --text-muted: #7c839c;
+  --green: #1fab5c;
+  --red: #e0473f;
+  --amber: #d99a1f;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(16, 26, 61, 0.06);
+  font-family: "Segoe UI", Inter, system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ============== SIDEBAR (NAVBAR LEVEL 1) ============== */
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--navy);
+  color: #cdd3ea;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 14px;
+}
+
+.sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 6px 18px;
+}
+
+.brand__icon {
+  background: var(--card);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: cover;
+}
+
+.brand__text { display: flex; flex-direction: column; line-height: 1.25; }
+.brand__name { color: #fff; font-weight: 700; font-size: 15px; }
+.brand__version {
+  font-size: 10px;
+  background: rgba(255,255,255,0.12);
+  padding: 1px 6px;
+  border-radius: 6px;
+  margin-left: 4px;
+}
+.brand__sub { font-size: 11px; color: #8891b3; }
+
+.sidebar__group-label {
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: #6d76a0;
+  margin: 8px 8px 6px;
+}
+
+.sidebar__nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+
+.nav__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  color: #b7bedb;
+  text-decoration: none;
+  font-size: 13.5px;
+}
+
+.nav__item:hover { background: var(--navy-light); color: #fff; }
+
+.nav__item--active {
+  background: var(--orange);
+  color: #fff;
+  font-weight: 600;
+}
+
+.nav__icon { width: 18px; text-align: center; font-size: 14px; }
+
+.sidebar__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.user__avatar {
+  width: 30px; height: 30px;
+  background: var(--orange);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 700;
+}
+.user__meta { display: flex; flex-direction: column; flex: 1; line-height: 1.2; }
+.user__name { color: #fff; font-size: 13px; font-weight: 600; }
+.user__role { font-size: 10.5px; color: #f5730b; }
+.user__logout { cursor: pointer; color: #8891b3; }
+
+/* ============== MAIN AREA ============== */
+.main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+/* ============== TOPBAR (NAVBAR LEVEL 2) ============== */
+.topbar {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+
+.topbar__tabs { display: flex; gap: 4px; }
+
+.tab {
+  padding: 16px 14px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  font-weight: 500;
+}
+
+.tab--active {
+  color: var(--orange);
+  border-bottom-color: var(--orange);
+  background: var(--orange-soft);
+  border-radius: 8px 8px 0 0;
+  font-weight: 700;
+}
+
+/* ============== CONTENT ============== */
+.content { padding: 24px; flex: 1; }
+
+.page-header__title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.page-header h1 { margin: 0; font-size: 21px; }
+
+.badge {
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+.badge--outline {
+  border: 1px solid var(--orange);
+  color: var(--orange);
+  background: var(--orange-soft);
+}
+
+.page-header__subtitle {
+  color: var(--text-muted);
+  max-width: 720px;
+  margin: 6px 0 16px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.page-header__actions {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  gap: 10px;
+}
+.page-header { position: relative; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.btn--primary { background: var(--orange); color: #fff; }
+.btn--primary:hover { background: #dd6708; }
+.btn--ghost { background: #fff; border-color: var(--border); color: var(--text); }
+.btn--outline { background: #fff; border-color: var(--orange); color: var(--orange); }
+.btn--sm { padding: 7px 11px; font-size: 12.5px; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ============== STAT CARDS ============== */
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 16px 0 20px;
+}
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.stat-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  margin-bottom: 10px;
+}
+.stat-card__value { font-size: 26px; font-weight: 700; }
+.stat-card__foot { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+.stat-card__foot--good { color: var(--green); }
+
+/* ============== FILTER BAR ============== */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.search-box {
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.search-box input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 13px;
+}
+.select {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  background: #fff;
+  color: var(--text);
+}
+.select--sm { padding: 5px 8px; }
+
+/* ============== TABLE ============== */
+.table-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table thead th {
+  text-align: left;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  background: #fafbfd;
+}
+.data-table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  font-size: 13px;
+}
+.data-table tbody tr:last-child td { border-bottom: none; }
+.data-table tbody tr:hover { background: #fafbff; }
+
+.col-check { width: 40px; }
+.col-action { width: 60px; text-align: right; }
+
+.person-cell { display: flex; align-items: center; gap: 10px; }
+.person-avatar {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--orange-soft);
+  color: var(--orange);
+  font-weight: 700;
+  font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.person-name { font-weight: 600; }
+.person-nip { color: var(--text-muted); font-size: 12px; }
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.status-pill--active { color: var(--green); }
+.status-pill--pending { color: var(--amber); }
+.status-pill--inactive { color: var(--text-muted); }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+.table-empty {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-muted);
+}
+.table-empty__icon { font-size: 32px; margin-bottom: 8px; }
+.table-empty__hint { font-size: 12px; margin-top: 4px; }
+
+/* ============== FOOTER / PAGINATION ============== */
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.table-footer__left { display: flex; align-items: center; gap: 8px; }
+.table-footer__right { display: flex; gap: 4px; }
+
+.page-btn {
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.page-btn--active { background: var(--navy); color: #fff; border-color: var(--navy); }
+.page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .stat-cards { grid-template-columns: 1fr; }
+  .page-header__actions { position: static; margin-top: 12px; }
+}
+
+/* ===================================================================
+   HALAMAN: Perencanaan & Analisis Risiko Pelanggan (risiko.html)
+   Menggunakan token & pola yang sama dengan halaman Pengguna & Akses.
+   =================================================================== */
+
+.blue { --accent: #1f6fd9; }
+.navy-solid { background: var(--navy); color: #fff; }
+
+/* --- Header card (pengganti page-header polos) --- */
+.header-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+  margin-bottom: 18px;
+}
+
+.header-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.pill--blue { background: #eaf2fe; color: #1f6fd9; }
+.pill--muted { background: #f1f2f7; color: var(--text-muted); }
+
+.header-meta__right { display: flex; gap: 10px; }
+
+.header-card h1 { margin: 4px 0 6px; font-size: 20px; }
+
+.header-card__subtitle {
+  color: var(--text-muted);
+  font-size: 13px;
+  max-width: 680px;
+  line-height: 1.5;
+  margin: 0 0 14px;
+}
+
+.header-card__actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.btn--navy { background: var(--navy); color: #fff; }
+.btn--navy:hover { background: var(--navy-light); }
+
+/* --- Stat cards (varian ikon berwarna, badge, progress) --- */
+.stat-cards--4 { grid-template-columns: repeat(4, 1fr); }
+
+.stat-card { position: relative; }
+
+.stat-card__icon-badge {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.stat-card__icon-badge--blue { background: #eaf2fe; color: #1f6fd9; }
+.stat-card__icon-badge--green { background: #e8f8ef; color: var(--green); }
+.stat-card__icon-badge--amber { background: #fdf3e2; color: var(--amber); }
+.stat-card__icon-badge--orange { background: var(--orange-soft); color: var(--orange); }
+
+.stat-card__tag {
+  position: absolute;
+  top: -1px;
+  right: 14px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 9px;
+  border-radius: 0 0 6px 6px;
+}
+.stat-card--priority { border-color: var(--orange); }
+
+.stat-card__badge-inline {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+.stat-card__badge-inline--green { background: #e8f8ef; color: var(--green); }
+.stat-card__badge-inline--muted { background: #f1f2f7; color: var(--text-muted); }
+
+.stat-card__link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--orange);
+  background: var(--orange-soft);
+  padding: 4px 9px;
+  border-radius: 6px;
+}
+
+/* segmented risk distribution bar */
+.risk-bar {
+  display: flex;
+  height: 7px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 10px 0 8px;
+  background: #eef0f6;
+}
+.risk-bar__seg--tinggi { background: var(--red); }
+.risk-bar__seg--sedang { background: var(--amber); }
+.risk-bar__seg--rendah { background: var(--green); }
+
+.risk-legend { display: flex; gap: 14px; font-size: 11px; color: var(--text-muted); }
+.risk-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.legend-dot { width: 7px; height: 7px; border-radius: 50%; }
+.legend-dot--tinggi { background: var(--red); }
+.legend-dot--sedang { background: var(--amber); }
+.legend-dot--rendah { background: var(--green); }
+
+/* --- Table card header (judul + subjudul + toolbar di dalam kartu) --- */
+.table-card__header { padding: 16px 18px 0; }
+.table-card__title-row { display: flex; align-items: center; gap: 8px; }
+.table-card__title-row h2 { font-size: 15px; margin: 0; }
+.table-card__subtitle { color: var(--text-muted); font-size: 12.5px; margin: 4px 0 14px; max-width: 640px; }
+.table-card .filter-bar { padding: 0 18px; margin-bottom: 0; }
+.table-card .data-table { margin-top: 14px; }
+
+/* --- Baris tabel risiko: indikator warna + sel majemuk --- */
+.risk-id-cell { display: flex; align-items: center; gap: 8px; }
+.risk-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.risk-dot--tinggi { background: var(--red); }
+.risk-dot--sedang { background: var(--amber); }
+.risk-dot--rendah { background: var(--green); }
+
+.cell-stack { display: flex; flex-direction: column; gap: 2px; }
+.cell-stack__title { font-weight: 600; }
+.cell-stack__sub { font-size: 11.5px; color: var(--text-muted); }
+
+.score-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-bottom: 3px;
+}
+.score-chip--tinggi { background: #fdecec; color: var(--red); }
+.score-chip--sedang { background: #fdf3e2; color: var(--amber); }
+.score-chip--rendah { background: #e8f8ef; color: var(--green); }
+
+.survey-text { font-size: 12.5px; font-weight: 600; }
+.survey-text--tinggi { color: var(--red); }
+.survey-text--sedang { color: var(--amber); }
+.survey-text--rendah { color: var(--green); }
+.survey-text__sub { font-size: 11px; color: var(--text-muted); font-weight: 400; }
+
+.risk-pill {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.risk-pill--tinggi { background: #fdecec; color: var(--red); }
+.risk-pill--sedang { background: #fdf3e2; color: var(--amber); }
+.risk-pill--rendah { background: #e8f8ef; color: var(--green); }
+
+.priority-rank { font-weight: 700; color: var(--text); }
+
+.approval-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.approval-pill--approved { background: #e8f8ef; color: var(--green); }
+.approval-pill--pending { background: #fdf3e2; color: var(--amber); }
+
+.row-actions { display: flex; gap: 6px; justify-content: flex-end; }
+.link-action {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+.chip-action {
+  font-size: 11.5px;
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+.chip-action--orange { background: var(--orange); color: #fff; }
+.chip-action--ghost { background: #f1f2f7; color: var(--text); }

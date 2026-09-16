@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Digita · Manajemen Akun &amp; Hak Akses Personel</title>
+<link rel="stylesheet" href="../style/style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ================= NAVBAR LEVEL 1 (SIDEBAR) ================= -->
+  <aside class="sidebar">
+    <div class="sidebar__brand">
+      <img src="../assets/logo1.png" alt="Logo Digita" class="brand__icon" />
+      <div class="brand__text">
+        <span class="brand__name">DIGITA</span>
+        <span class="brand__sub">Asset Lifecycle System</span>
+      </div>
+    </div>
+
+    <p class="sidebar__group-label">SIKLUS ASET PLN</p>
+
+    <nav class="sidebar__nav">
+      <a href="#" class="nav__item nav__item--active" data-nav="master-data">
+        <span class="nav__icon">🗂️</span> Master Data
+      </a>
+      <a href="../perencanaan_risiko/perencanaan_risiko.html" class="nav__item" data-nav="perencanaan">
+        <span class="nav__icon">📋</span> Perencanaan &amp; Risiko
+      </a>
+      <a href="#" class="nav__item" data-nav="pengadaan">
+        <span class="nav__icon">🔄</span> Pengadaan &amp; Logistik
+      </a>
+      <a href="#" class="nav__item" data-nav="pemasangan">
+        <span class="nav__icon">📍</span> Pemasangan (Deployment)
+      </a>
+      <a href="#" class="nav__item" data-nav="operasional">
+        <span class="nav__icon">⚙️</span> Penggunaan &amp; Operasional
+      </a>
+      <a href="#" class="nav__item" data-nav="pemeliharaan">
+        <span class="nav__icon">🛠️</span> Pemeliharaan
+      </a>
+      <a href="#" class="nav__item" data-nav="penghapusan">
+        <span class="nav__icon">🗑️</span> Penghapusan
+      </a>
+      <a href="#" class="nav__item" data-nav="laporan">
+        <span class="nav__icon">📊</span> Laporan &amp; Rekap
+      </a>
+      <a href="#" class="nav__item" data-nav="pengaturan">
+        <span class="nav__icon">🤖</span> Pengaturan &amp; Bot
+      </a>
+    </nav>
+
+    <div class="sidebar__user">
+      <div class="user__avatar">BS</div>
+      <div class="user__meta">
+        <span class="user__name">Bambang S.</span>
+        <span class="user__role">Team Leader AP</span>
+      </div>
+      <span class="user__logout" title="Keluar">⏻</span>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN AREA ================= -->
+  <div class="main">
+
+    <!-- ============ NAVBAR LEVEL 2 (TOP TABS) ============ -->
+    <header class="topbar">
+      <nav class="topbar__tabs">
+        <a href="#" class="tab" data-tab="unit-organisasi">Unit Organisasi</a>
+        <a href="#" class="tab tab--active" data-tab="pengguna-akses">Pengguna &amp; Akses</a>
+        <a href="#" class="tab" data-tab="pesan-gateway">Pesan &amp; Gateway</a>
+        <a href="#" class="tab" data-tab="perintah-s41">Perintah S41</a>
+        <a href="#" class="tab" data-tab="nomor-alat-s41">Nomor Alat S41</a>
+      </nav>
+    </header>
+
+    <!-- ============ PAGE CONTENT ============ -->
+    <main class="content">
+
+      <div class="page-header">
+        <div class="page-header__title-row">
+          <h1>Manajemen Akun &amp; Hak Akses Personel</h1>
+          <span class="badge badge--outline">RBAC v2.4</span>
+        </div>
+        <p class="page-header__subtitle">
+          Pusat otorisasi hak kendali gardu, verifikasi otentikasi multi-tier (Unit Induk, UP3, ULP), dan delegasi wewenang operasional telemetri S41.
+        </p>
+
+        <div class="page-header__actions">
+          <button class="btn btn--ghost" id="btnMatriksPeran">
+            <span class="btn__icon">🛡️</span> Matriks Peran (RBAC)
+          </button>
+          <button class="btn btn--primary" id="btnTambahPengguna">
+            <span class="btn__icon">＋</span> Tambah Pengguna
+          </button>
+        </div>
+      </div>
+
+      <!-- ============ STAT CARDS ============ -->
+      <section class="stat-cards">
+        <div class="stat-card">
+          <div class="stat-card__top">
+            <span class="stat-card__label">TOTAL PERSONEL TERDAFTAR</span>
+            <span class="stat-card__icon">📇</span>
+          </div>
+          <div class="stat-card__value" id="statTotal">–</div>
+          <div class="stat-card__foot" id="statTotalFoot">Belum ada data</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card__top">
+            <span class="stat-card__label">PENGGUNA AKTIF</span>
+            <span class="stat-card__icon">🛡️</span>
+          </div>
+          <div class="stat-card__value" id="statAktif">–</div>
+          <div class="stat-card__foot stat-card__foot--good" id="statAktifFoot">Belum ada data</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card__top">
+            <span class="stat-card__label">AKUN DINONAKTIFKAN</span>
+            <span class="stat-card__icon">🔒</span>
+          </div>
+          <div class="stat-card__value" id="statNonaktif">–</div>
+          <div class="stat-card__foot" id="statNonaktifFoot">Belum ada data</div>
+        </div>
+      </section>
+
+      <!-- ============ FILTER BAR ============ -->
+      <section class="filter-bar">
+        <div class="search-box">
+          <span class="search-box__icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Cari Nama, NIP, atau Email Personel..." />
+        </div>
+
+        <select id="filterRole" class="select">
+          <option value="">Semua Peran / Role</option>
+        </select>
+
+        <select id="filterUnit" class="select">
+          <option value="">Semua Unit Kerja</option>
+        </select>
+
+        <button class="btn btn--ghost btn--sm" id="btnReset">
+          <span class="btn__icon">⟲</span> Reset
+        </button>
+
+        <button class="btn btn--outline btn--sm" id="btnDownloadSelected" disabled>
+          <span class="btn__icon">⬇</span> Unduh Terpilih (<span id="selectedCount">0</span>)
+        </button>
+      </section>
+
+      <!-- ============ TABLE ============ -->
+      <section class="table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th class="col-check">
+                <input type="checkbox" id="checkAll" title="Pilih semua" />
+              </th>
+              <th>NAMA PERSONEL &amp; NIP</th>
+              <th>PERAN / ROLE</th>
+              <th>UNIT PENEMPATAN</th>
+              <th>HAK AKSES UTAMA S41</th>
+              <th>STATUS AKUN</th>
+              <th class="col-action">AKSI</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Diisi oleh script.js. Kosong karena belum ada database. -->
+          </tbody>
+        </table>
+
+        <div class="table-empty" id="tableEmptyState">
+          <span class="table-empty__icon">📭</span>
+          <p>Belum ada data personel.</p>
+          <span class="table-empty__hint">Hubungkan API ke database untuk menampilkan data di sini.</span>
+        </div>
+      </section>
+
+      <!-- ============ PAGINATION ============ -->
+      <footer class="table-footer">
+        <div class="table-footer__left">
+          <label for="pageSize">Baris per halaman:</label>
+          <select id="pageSize" class="select select--sm">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+          </select>
+          <span id="rowsInfo">0–0 dari 0 baris data</span>
+        </div>
+
+        <div class="table-footer__right" id="paginationControls">
+          <button class="page-btn" id="prevPage" disabled>‹</button>
+          <button class="page-btn page-btn--active">1</button>
+          <button class="page-btn" id="nextPage" disabled>›</button>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+</div>
+
+<script type="module" src="../api/api.js"></script>
+<script type="module" src="../script/script.js"></script>
+</body>
+</html>
