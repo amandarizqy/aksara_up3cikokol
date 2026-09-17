@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DIGITA · Manajemen Data &amp; Hak Akses Personel</title>
+<title>DIGITA · Struktur &amp; Master Unit PLN</title>
 <link rel="stylesheet" href="../style/style.css" />
+<!-- Style tambahan khusus halaman ini (badge tingkat, tree indentasi, pagination) -->
+<link rel="stylesheet" href="../style/unit-structure.css" />
 </head>
 <body>
 
@@ -76,23 +78,30 @@
       </nav>
     </header>
 
-    <!-- ============ PAGE CONTENT ============ -->
+    <!-- ============ PAGE CONTENT (SISI KANAN) ============ -->
     <main class="content">
 
       <div class="page-header">
         <div class="page-header__title-row">
-          <h1>Manajemen Data &amp; Struktur Unit PLN</h1>
+          <div>
+            <div class="page-header__eyebrow">
+              <span>UC-04 · MASTER DATA SYSTEM</span>
+              <span class="eyebrow__sep">/</span>
+              <span class="eyebrow__context">Distribusi Jawa Timur</span>
+            </div>
+            <h1>Struktur &amp; Master Unit PLN</h1>
+          </div>
         </div>
         <p class="page-header__subtitle">
           Pengelolaan hierarki komando operasional gardu, unit induk pelaksana, dan kantor layanan pelanggan.
         </p>
 
         <div class="page-header__actions">
-          <button class="btn btn--ghost" id="btnMatriksPeran">
-            <span class="btn__icon">🛡️</span> Matriks Peran (RBAC)
+          <button class="btn btn--ghost" id="btnEksporData">
+            <span class="btn__icon">⬇</span> Ekspor Data
           </button>
-          <button class="btn btn--primary" id="btnTambahPengguna">
-            <span class="btn__icon">＋</span> Tambah Pengguna
+          <button class="btn btn--primary" id="btnTambahUnit">
+            <span class="btn__icon">＋</span> Tambah Unit Baru
           </button>
         </div>
       </div>
@@ -101,54 +110,67 @@
       <section class="stat-cards">
         <div class="stat-card">
           <div class="stat-card__top">
-            <span class="stat-card__label">TOTAL PERSONEL TERDAFTAR</span>
-            <span class="stat-card__icon">📇</span>
+            <span class="stat-card__label">TINGKAT I • REGIONAL</span>
+            <span class="stat-card__icon stat-card__icon--box">🏢</span>
           </div>
-          <div class="stat-card__value" id="statTotal">–</div>
-          <div class="stat-card__foot" id="statTotalFoot">Belum ada data</div>
+          <div class="stat-card__value stat-card__value--inline">
+            <span id="statUnitInduk">–</span><span class="stat-card__unit">Unit Induk</span>
+          </div>
+          <div class="stat-card__foot stat-card__foot--good" id="statUnitIndukFoot">Memuat data…</div>
         </div>
 
         <div class="stat-card">
           <div class="stat-card__top">
-            <span class="stat-card__label">PENGGUNA AKTIF</span>
-            <span class="stat-card__icon">🛡️</span>
+            <span class="stat-card__label">TINGKAT II • PELAKSANA PELAYANAN</span>
+            <span class="stat-card__icon stat-card__icon--box">🏬</span>
           </div>
-          <div class="stat-card__value" id="statAktif">–</div>
-          <div class="stat-card__foot stat-card__foot--good" id="statAktifFoot">Belum ada data</div>
+          <div class="stat-card__value stat-card__value--inline">
+            <span id="statWilayahUp3">–</span><span class="stat-card__unit">Wilayah UP3</span>
+          </div>
+          <div class="stat-card__foot stat-card__foot--good" id="statWilayahUp3Foot">Memuat data…</div>
         </div>
 
         <div class="stat-card">
           <div class="stat-card__top">
-            <span class="stat-card__label">AKUN DINONAKTIFKAN</span>
-            <span class="stat-card__icon">🔒</span>
+            <span class="stat-card__label">TINGKAT III • LAYANAN PELANGGAN</span>
+            <span class="stat-card__icon stat-card__icon--box">🏪</span>
           </div>
-          <div class="stat-card__value" id="statNonaktif">–</div>
-          <div class="stat-card__foot" id="statNonaktifFoot">Belum ada data</div>
+          <div class="stat-card__value stat-card__value--inline">
+            <span id="statPoskoUlp">–</span><span class="stat-card__unit">Posko ULP</span>
+          </div>
+          <div class="stat-card__foot stat-card__foot--good" id="statPoskoUlpFoot">Memuat data…</div>
         </div>
       </section>
+
+      <!-- ============ NOTIFIKASI FALLBACK (tersembunyi kecuali API gagal) ============ -->
+      <div class="api-fallback-banner is-hidden" id="apiFallbackBanner">
+        ⚠️ <span>API backend belum terhubung — menampilkan data contoh untuk pratinjau tampilan.</span>
+      </div>
 
       <!-- ============ FILTER BAR ============ -->
       <section class="filter-bar">
         <div class="search-box">
           <span class="search-box__icon">🔍</span>
-          <input type="text" id="searchInput" placeholder="Cari Nama, NIP, atau Email Personel..." />
+          <input type="text" id="searchInput" placeholder="Cari kode unit, nama wilayah, PIC, atau alamat..." />
         </div>
 
-        <select id="filterRole" class="select">
-          <option value="">Semua Peran / Role</option>
-        </select>
+        <div class="filter-bar__spacer"></div>
 
-        <select id="filterUnit" class="select">
-          <option value="">Semua Unit Kerja</option>
-        </select>
+        <div class="filter-bar__inline-group">
+          <label for="filterTingkat">Tingkat:</label>
+          <select id="filterTingkat" class="select">
+            <option value="">Semua Tingkat</option>
+            <option value="1">UI (Tingkat I)</option>
+            <option value="2">UP3 (Tingkat II)</option>
+            <option value="3">ULP (Tingkat III)</option>
+          </select>
+        </div>
 
         <button class="btn btn--ghost btn--sm" id="btnReset">
           <span class="btn__icon">⟲</span> Reset
         </button>
 
-        <button class="btn btn--outline btn--sm" id="btnDownloadSelected" disabled>
-          <span class="btn__icon">⬇</span> Unduh Terpilih (<span id="selectedCount">0</span>)
-        </button>
+        <span class="filter-bar__result-info" id="filterResultInfo">Menampilkan – dari – unit</span>
       </section>
 
       <!-- ============ TABLE ============ -->
@@ -156,45 +178,40 @@
         <table class="data-table">
           <thead>
             <tr>
-              <th class="col-check">
-                <input type="checkbox" id="checkAll" title="Pilih semua" />
-              </th>
-              <th>NAMA PERSONEL &amp; NIP</th>
-              <th>PERAN / ROLE</th>
-              <th>UNIT PENEMPATAN</th>
-              <th>HAK AKSES UTAMA S41</th>
-              <th>STATUS AKUN</th>
+              <th>KODE UNIT</th>
+              <th>NAMA UNIT / WILAYAH</th>
+              <th>TINGKAT</th>
+              <th>PENANGGUNG JAWAB (PIC)</th>
+              <th>KONTAK / LOKASI</th>
+              <th>STATUS</th>
               <th class="col-action">AKSI</th>
             </tr>
           </thead>
           <tbody id="tableBody">
-            <!-- Diisi oleh script.js. Kosong karena belum ada database. -->
+            <!-- Diisi oleh script/master-unit.page.js lewat api/master-unit.api.js -->
+            <tr class="table-loading-row"><td colspan="7">Memuat data unit…</td></tr>
           </tbody>
         </table>
 
-        <div class="table-empty" id="tableEmptyState">
+        <div class="table-empty is-hidden" id="tableEmptyState">
           <span class="table-empty__icon">📭</span>
-          <p>Belum ada data personel.</p>
-          <span class="table-empty__hint">Hubungkan API ke database untuk menampilkan data di sini.</span>
+          <p>Belum ada data unit master.</p>
+          <span class="table-empty__hint">Coba ubah kata kunci pencarian atau filter tingkat.</span>
         </div>
       </section>
 
       <!-- ============ PAGINATION ============ -->
       <footer class="table-footer">
         <div class="table-footer__left">
-          <label for="pageSize">Baris per halaman:</label>
-          <select id="pageSize" class="select select--sm">
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-          </select>
-          <span id="rowsInfo">0–0 dari 0 baris data</span>
+          <span class="table-footer__info-text" id="pageInfoText">Memuat halaman…</span>
         </div>
 
-        <div class="table-footer__right" id="paginationControls">
-          <button class="page-btn" id="prevPage" disabled>‹</button>
-          <button class="page-btn page-btn--active">1</button>
-          <button class="page-btn" id="nextPage" disabled>›</button>
+        <div class="table-footer__right">
+          <div class="pagination" id="paginationControls">
+            <button class="pagination__nav-btn" id="prevPage" disabled>Sebelumnya</button>
+            <!-- Tombol nomor halaman digenerate oleh JS -->
+            <button class="pagination__nav-btn" id="nextPage">Berikutnya</button>
+          </div>
         </div>
       </footer>
 
@@ -202,7 +219,12 @@
   </div>
 </div>
 
+<!-- Modul bersama (punya proyek, tidak diubah) -->
 <script type="module" src="../api/api.js"></script>
 <script type="module" src="../script/script.js"></script>
+
+<!-- Modul khusus halaman Struktur & Master Unit -->
+<script type="module" src="../api/master-unit.api.js"></script>
+<script type="module" src="../script/master-unit.page.js"></script>
 </body>
 </html>

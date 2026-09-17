@@ -366,11 +366,6 @@ body {
   .page-header__actions { position: static; margin-top: 12px; }
 }
 
-/* ===================================================================
-   HALAMAN: Perencanaan & Analisis Risiko Pelanggan (risiko.html)
-   Menggunakan token & pola yang sama dengan halaman Pengguna & Akses.
-   =================================================================== */
-
 .blue { --accent: #1f6fd9; }
 .navy-solid { background: var(--navy); color: #fff; }
 
